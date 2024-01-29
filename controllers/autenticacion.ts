@@ -34,18 +34,27 @@ export const login = async (req: Request, res: Response): Promise<void> => {
 };
 
 export const register = async (req: Request, res: Response): Promise<void> => {
-	const { apellido, nombre, dni, mail, contraseña }: ITutor = req.body;
-	const createdTutor: ITutor | null = await Tutor.findOne({
+	const { apellido, nombre, dni, mail, contraseña, isAdmin }: ITutor = req.body;
+	let createdTutor: ITutor | null = await Tutor.findOne({
 		dni,
 	});
 	if (createdTutor) {
+		const { apellido, nombre, dni, mail } = createdTutor;
 		res.status(403).json({
-			msg: `Ya existe una persona registrada con ese DNI`,
-			createdTutor,
+			msg: `Ya existe una persona registrada con ese DNI: ${apellido}, ${nombre} - DNI: ${dni} - Mail: ${mail}`,
 		});
 		return;
 	}
-	const tutor = new Tutor({ apellido, nombre, dni, mail, contraseña });
+	createdTutor = await Tutor.findOne({
+		mail,
+	});
+	if (createdTutor) {
+		res.status(403).json({
+			msg: `Ya existe una persona registrada con ese mail: ${apellido}, ${nombre} - DNI: ${dni} - Mail: ${mail}`,
+		});
+		return;
+	}
+	const tutor = new Tutor({ apellido, nombre, dni, mail, contraseña, isAdmin });
 	const salt = bcryptjs.genSaltSync();
 	tutor.contraseña = bcryptjs.hashSync(contraseña, salt);
 	await tutor.save();

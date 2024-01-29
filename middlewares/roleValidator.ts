@@ -1,7 +1,8 @@
 import { NextFunction, Request, Response } from "express";
+import { ITutor } from "../models/tutor";
 
 export const isAdmin = (req: Request, res: Response, next: NextFunction) => {
-	const { isAdmin } = req.body.user;
+	const { isAdmin }: ITutor = req.body.user;
 
 	if (!isAdmin) {
 		res.status(401).json({

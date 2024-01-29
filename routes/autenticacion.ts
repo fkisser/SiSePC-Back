@@ -2,7 +2,6 @@ import { Router } from "express";
 import { login, register } from "../controllers/autenticacion";
 import { check } from "express-validator";
 import { errorsCollector } from "../middlewares/errorsCollector";
-import { existingMail } from "../helpers/dbValidators";
 import jwtValidator from "../middlewares/jwtValidator";
 import { isAdmin } from "../middlewares/roleValidator";
 
@@ -27,7 +26,6 @@ router.post(
 	[
 		jwtValidator,
 		isAdmin,
-		existingMail,
 		check("apellido", "El apellido es obligatorio").not().isEmpty(),
 		check("nombre", "El nombre es obligatorio").not().isEmpty(),
 		check("dni", "El DNI es obligatorio").not().isEmpty(),

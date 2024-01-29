@@ -16,6 +16,7 @@ export const getCarreraPorId = async (req: Request, res: Response) => {
 		: res.status(404).json({
 				msj: "El Id proporcionado no corresponde a ninguna carrera",
 		  });
+	return;
 };
 export const createCarrera = async (req: Request, res: Response) => {
 	const carreraData: ICarrera = req.body;
@@ -60,7 +61,11 @@ export const updateCarrera = async (req: Request, res: Response) => {
 };
 export const deleteCarrera = async (req: Request, res: Response) => {
 	const { ID } = req.params;
-	const carrera = await Carrera.findByIdAndUpdate(ID, { visible: false });
+	const carrera = await Carrera.findByIdAndUpdate(
+		ID,
+		{ visible: false },
+		{ new: true }
+	);
 	if (!carrera) {
 		res.status(404).json({
 			msg: `El ID provisto no corresponde a una carrera registrada`,

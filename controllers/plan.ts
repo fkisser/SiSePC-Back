@@ -1,15 +1,17 @@
 import { Request, Response } from "express";
 import Plan, { IPlan } from "../models/plan";
-import Carrera from "../models/carrera";
+import Carrera, { ICarrera } from "../models/carrera";
 
 export const getPlanes = async (req: Request, res: Response) => {
-	const planes: IPlan[] = await Plan.find();
+	const planes: IPlan[] = await Plan.find().populate("carrera");
 	res.status(200).json({ planes });
 	return;
 };
 export const getPlanesPorCarrera = async (req: Request, res: Response) => {
 	const { ID_CARRERA } = req.params;
-	const planes: IPlan[] = await Plan.find({ carrera: ID_CARRERA });
+	const planes: IPlan[] = await Plan.find({ carrera: ID_CARRERA }).populate(
+		"carrera"
+	);
 	planes?.length
 		? res.status(200).json({
 				planes,
@@ -20,7 +22,7 @@ export const getPlanesPorCarrera = async (req: Request, res: Response) => {
 };
 export const getPlanPorId = async (req: Request, res: Response) => {
 	const { ID } = req.params;
-	const plan: IPlan | null = await Plan.findById(ID);
+	const plan: IPlan | null = await Plan.findById(ID).populate("carrera");
 	plan
 		? res.status(200).json({
 				plan,
@@ -30,7 +32,14 @@ export const getPlanPorId = async (req: Request, res: Response) => {
 		  });
 };
 export const createPlan = async (req: Request, res: Response) => {
-	const planData: IPlan = req.body;
+	const planData = req.body;
+	const carrera: ICarrera | null = await Carrera.findById(planData.carrera);
+	if (!carrera) {
+		res.status(404).json({
+			msj: "El Id proporcionado no corresponde a ninguna carrera",
+		});
+		return;
+	}
 	const plan = new Plan(planData);
 	const createdPlan: IPlan | null = await Plan.findOne({
 		carrera: plan.carrera,

@@ -1,12 +1,12 @@
-import { Model, Schema, model } from "mongoose";
+import { Schema } from "mongoose";
 
 export interface IAsignatura {
 	codigo: string;
 	nombre: string;
 	año: number;
 	cuatrimestre: string;
-	paraCursar?: string[];
-	paraRendir?: string[];
+	regularizada?: string[];
+	aprobada?: string[];
 	seDicta?: boolean;
 	visible: boolean;
 }
@@ -28,12 +28,12 @@ export const AsignaturaSchema = new Schema<IAsignatura>({
 		type: String,
 		required: true,
 	},
-	paraCursar: {
+	regularizada: {
 		type: [String],
 		required: false,
 		default: [],
 	},
-	paraRendir: {
+	aprobada: {
 		type: [String],
 		required: false,
 		default: [],
