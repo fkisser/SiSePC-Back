@@ -58,7 +58,7 @@ export interface IEstudiante {
 	celular?: string;
 	ciudad?: string;
 	cursando: boolean;
-	visible: boolean;
+	visible?: boolean;
 	tutores?: string[];
 	trabaja: boolean;
 	relCarrera?: boolean;
@@ -102,7 +102,7 @@ export const EstudianteSchema = new Schema<IEstudiante>({
 	},
 	visible: {
 		type: Boolean,
-		required: true,
+		required: false,
 		default: true,
 	},
 	tutores: {

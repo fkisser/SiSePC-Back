@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import Carrera, { ICarrera } from "../models/carrera";
 
 export const getCarreras = async (req: Request, res: Response) => {
-	const carreras: ICarrera[] = await Carrera.find();
+	const carreras: ICarrera[] = await Carrera.find({ visible: true });
 	res.status(200).json({ carreras });
 	return;
 };
