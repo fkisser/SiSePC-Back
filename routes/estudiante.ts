@@ -3,7 +3,11 @@ import { errorsCollector } from "../middlewares/errorsCollector";
 import { check } from "express-validator";
 import jwtValidator from "../middlewares/jwtValidator";
 import { isAdmin } from "../middlewares/roleValidator";
-import { createEstudiante, getEstudiantes } from "../controllers/estudiante";
+import {
+	createEstudiante,
+	getEstudianteByDNI,
+	getEstudiantes,
+} from "../controllers/estudiante";
 import { validarAcciones } from "../middlewares/validarAcciones";
 import {
 	validarDetallePlan,
@@ -13,7 +17,7 @@ import {
 const router = Router();
 
 router.get("/", [jwtValidator, isAdmin], getEstudiantes);
-// router.get("/carrera/:ID_CARRERA", getPlanesPorCarrera);
+router.get("/dni/:DNI", getEstudianteByDNI);
 // router.get("/plan/:ID", getPlanPorId);
 router.post(
 	"/",
