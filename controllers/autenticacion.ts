@@ -54,13 +54,27 @@ export const register = async (req: Request, res: Response): Promise<void> => {
 		});
 		return;
 	}
-	const tutor = new Tutor({ apellido, nombre, dni, mail, contraseña, isAdmin });
+	const tutor = new Tutor({
+		apellido,
+		nombre,
+		dni,
+		mail,
+		contraseña,
+		isAdmin,
+	});
 	const salt = bcryptjs.genSaltSync();
 	tutor.contraseña = bcryptjs.hashSync(contraseña, salt);
-	await tutor.save();
+	console.log(tutor);
+	const tutorGuardado: ITutor | null = await tutor.save();
+	if (!tutorGuardado) {
+		res.status(400).json({
+			msg: "No se pudo registrar el nuevo tutor, revise los datos",
+			tutor,
+		});
+	}
 	res.status(201).json({
 		msg: "Tutor/a creado/a con éxito",
-		tutor,
+		tutorGuardado,
 	});
 	return;
 };

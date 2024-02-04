@@ -13,10 +13,6 @@ router.post(
 		check("dni", "El campo DNI debe ser un número").isNumeric(),
 		check("dni", "El campo DNI es obligatorio").not().isEmpty(),
 		check("contraseña", "El campo contraseña es obligatorio").not().isEmpty(),
-		check(
-			"contraseña",
-			"La contraseña debe tener al menos 6 caracteres"
-		).isLength({ min: 6 }),
 		errorsCollector,
 	],
 	login

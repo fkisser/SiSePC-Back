@@ -1,4 +1,4 @@
-import { Model, Schema, model } from "mongoose";
+import { Model, Schema, Types, model } from "mongoose";
 import { EstudianteSchema, IEstudiante } from "./estudiante";
 
 export interface ITutor {
@@ -9,7 +9,7 @@ export interface ITutor {
 	celular?: string;
 	contraseña: string;
 	isAdmin?: boolean;
-	estudiantes?: IEstudiante[];
+	estudiantes?: Types.ObjectId[];
 	visible?: boolean;
 	recuperacion?: string; //para recuperar la contraseña, se genera con randomstring y se envía al mail
 }
@@ -45,9 +45,10 @@ export const TutorSchema = new Schema<ITutor>({
 		default: false,
 	},
 	estudiantes: {
-		type: [EstudianteSchema],
+		type: [Types.ObjectId],
+		ref: "Estudiante",
 		required: false,
-		default: [],
+		default: null,
 	},
 	visible: {
 		type: Boolean,

@@ -3,8 +3,8 @@ import { Model, Schema, Types, model } from "mongoose";
 export interface IAccion {
 	fecha: Date;
 	descripcion: string;
-	archivo: string;
-	tutor?: Types.ObjectId;
+	archivo?: string;
+	tutor: Types.ObjectId;
 	visible?: boolean;
 }
 
@@ -19,12 +19,11 @@ export const AccionSchema = new Schema<IAccion>({
 	},
 	archivo: {
 		type: String,
-		required: true,
+		required: false,
 	},
 	tutor: {
 		type: Schema.Types.ObjectId,
 		ref: "Tutor",
-		required: false,
 	},
 	visible: {
 		type: Boolean,

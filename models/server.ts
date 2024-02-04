@@ -4,6 +4,7 @@ import rutaPrincipal from "../routes/main";
 import rutasAutenticacion from "../routes/autenticacion";
 import rutasPlan from "../routes/plan";
 import rutasCarrera from "../routes/carrera";
+import rutasEstudiante from "../routes/estudiante";
 
 import { dbConnection } from "../database/config";
 
@@ -43,6 +44,7 @@ export class Server {
 		this.app.use(this.pathAutenticacion, rutasAutenticacion);
 		this.app.use(this.pathPlan, rutasPlan);
 		this.app.use(this.pathCarrera, rutasCarrera);
+		this.app.use(this.pathEstudiante, rutasEstudiante);
 	}
 
 	listen(): void {

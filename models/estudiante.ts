@@ -1,5 +1,6 @@
 import { Model, Schema, Types, model } from "mongoose";
 import { AccionSchema, IAccion } from "./accion";
+import { AsignaturaSchema, IAsignatura } from "./asignatura";
 
 interface ICondicion {
 	nombre: string;
@@ -27,26 +28,27 @@ export const CondicionSchema = new Schema<ICondicion>({
 	},
 });
 
-interface IDetalleAsignatura {
-	asignaturaOriginal: Types.ObjectId;
-	asignaturaActual?: Types.ObjectId;
-	condicion: ICondicion[];
+export interface IDetalleAsignatura {
+	asignaturaOriginal: IAsignatura;
+	asignaturaActual?: IAsignatura | null;
+	condicion?: ICondicion;
 }
 export const DetalleAsignaturaSchema = new Schema<IDetalleAsignatura>({
 	asignaturaOriginal: {
-		type: Schema.Types.ObjectId,
-		ref: "Asignatura",
+		type: AsignaturaSchema,
 		required: true,
 	},
 	asignaturaActual: {
-		type: Schema.Types.ObjectId,
-		ref: "Asignatura",
+		type: AsignaturaSchema,
 		required: false,
+		default: null,
 	},
 	condicion: {
-		type: [CondicionSchema],
+		type: CondicionSchema,
 		required: false,
-		default: [],
+		default: {
+			nombre: "Pendiente",
+		},
 	},
 });
 
@@ -81,7 +83,6 @@ export const EstudianteSchema = new Schema<IEstudiante>({
 	dni: {
 		type: Number,
 		required: true,
-		unique: true,
 	},
 	mail: {
 		type: String,
