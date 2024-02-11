@@ -22,8 +22,7 @@ export const validarDetallePlan = async (
 			return;
 		}
 		detallePlan.forEach(async (detalleAsignatura: IDetalleAsignatura) => {
-			const { asignaturaOriginal, asignaturaActual }: IDetalleAsignatura =
-				detalleAsignatura;
+			const { asignaturaOriginal }: IDetalleAsignatura = detalleAsignatura;
 
 			if (!asignaturaOriginal) {
 				res.status(400).json({
@@ -41,34 +40,6 @@ export const validarDetallePlan = async (
 					msg: "La asignatura seleccionada no se encuentra en el plan de estudios",
 				});
 				return;
-			}
-			if (planInscripto.actual) {
-				if (!asignaturaActual) {
-					res.status(400).json({
-						msg: "Es necesario seleccionar la equivalencia en el plan actual",
-					});
-					return;
-				}
-				const planActual: IPlan | null = await Plan.findOne({
-					carrera: planInscripto.carrera._id,
-					actual: true,
-				});
-				if (!planActual) {
-					res.status(404).json({
-						msg: "No se encontró plan actual para esta carrera",
-					});
-					return;
-				}
-				if (
-					!planActual.asignaturas?.find((asignatura: IAsignatura) => {
-						return asignatura.nombre === asignaturaActual.nombre;
-					})
-				) {
-					res.status(404).json({
-						msg: "La asignatura seleccionada no se encuentra en el plan de estudios actual",
-					});
-					return;
-				}
 			}
 		});
 	}
