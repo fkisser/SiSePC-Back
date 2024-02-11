@@ -73,6 +73,8 @@ export interface IEstudiante {
 	horarioTrabajo?: string;
 	detallesTrabajo?: string;
 	plan: Types.ObjectId;
+	ultimaAprobada?: Date | string;
+	ultimaReinscripcion?: Date | string;
 	acciones?: IAccion[];
 	detallePlan?: IDetalleAsignatura[];
 }
@@ -136,6 +138,16 @@ export const EstudianteSchema = new Schema<IEstudiante>({
 		type: Schema.Types.ObjectId,
 		ref: "Plan",
 		required: true,
+	},
+	ultimaAprobada: {
+		type: Date || String,
+		required: false,
+		default: "",
+	},
+	ultimaReinscripcion: {
+		type: Date || String,
+		required: false,
+		default: "",
 	},
 	acciones: {
 		type: [AccionSchema],
