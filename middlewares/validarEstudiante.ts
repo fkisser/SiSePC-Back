@@ -120,7 +120,7 @@ export const validarDatosEstudiante = async (
 	}
 	if (ciudad && ciudad.length === 0) {
 		res.status(400).json({
-			msg: "El ciudad no puede estar vacío",
+			msg: "El campo de localidad no puede estar vacío",
 		});
 		return;
 	}

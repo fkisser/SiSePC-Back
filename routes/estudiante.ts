@@ -7,6 +7,7 @@ import {
 	createEstudiante,
 	getEstudianteByDNI,
 	getEstudiantes,
+	updateEstudiante,
 } from "../controllers/estudiante";
 import { validarAcciones } from "../middlewares/validarAcciones";
 import {
@@ -18,7 +19,6 @@ const router = Router();
 
 router.get("/", [jwtValidator, isAdmin], getEstudiantes);
 router.get("/dni/:DNI", getEstudianteByDNI);
-// router.get("/plan/:ID", getPlanPorId);
 router.post(
 	"/",
 	[
@@ -44,11 +44,17 @@ router.post(
 	],
 	createEstudiante
 );
-// router.patch(
-// 	"/:ID",
-// 	[jwtValidator, isAdmin, validarPlan, validarAsignaturas, errorsCollector],
-// 	updatePlan
-// );
+router.patch(
+	"/:ID",
+	[
+		jwtValidator,
+		isAdmin,
+		validarDatosEstudiante,
+		validarDetallePlan,
+		errorsCollector,
+	],
+	updateEstudiante
+);
 // router.delete("/:ID", [jwtValidator, isAdmin, errorsCollector], deletePlan);
 
 export default router;

@@ -31,6 +31,7 @@ export const CondicionSchema = new Schema<ICondicion>({
 export interface IDetalleAsignatura {
 	asignaturaOriginal: IAsignatura;
 	asignaturaActual?: IAsignatura | null;
+	aprobada: boolean;
 	condicion?: ICondicion;
 }
 export const DetalleAsignaturaSchema = new Schema<IDetalleAsignatura>({
@@ -42,6 +43,11 @@ export const DetalleAsignaturaSchema = new Schema<IDetalleAsignatura>({
 		type: AsignaturaSchema,
 		required: false,
 		default: null,
+	},
+	aprobada: {
+		type: Boolean,
+		required: true,
+		default: false,
 	},
 	condicion: {
 		type: CondicionSchema,

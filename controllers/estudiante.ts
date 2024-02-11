@@ -65,3 +65,17 @@ export const createEstudiante = async (req: Request, res: Response) => {
 	});
 	return;
 };
+export const updateEstudiante = async (req: Request, res: Response) => {
+	const { ID } = req.params;
+	const estudianteData = req.body;
+	const estudiante = await Estudiante.findByIdAndUpdate(
+		ID,
+		{ ...estudianteData },
+		{ new: true }
+	);
+	res.status(200).json({
+		msg: "Estudiante modificado con éxito",
+		estudiante,
+	});
+	return;
+};
