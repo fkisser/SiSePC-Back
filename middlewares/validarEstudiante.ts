@@ -1,49 +1,9 @@
 import { NextFunction, Request, Response } from "express";
-import { IAsignatura } from "../models/asignatura";
 import Plan, { IPlan } from "../models/plan";
-import { IDetalleAsignatura, IEstudiante } from "../models/estudiante";
+import { IEstudiante } from "../models/estudiante";
 import Tutor, { ITutor } from "../models/tutor";
 import { mailRegExp } from "../helpers/constants";
 
-export const validarDetallePlan = async (
-	req: Request,
-	res: Response,
-	next: NextFunction
-) => {
-	const { plan, detallePlan }: IEstudiante = req.body;
-	if (detallePlan && plan) {
-		const planInscripto: IPlan | null = await Plan.findById(plan).populate(
-			"carrera"
-		);
-		if (!planInscripto) {
-			res.status(404).json({
-				msg: "El Plan seleccionado no es válido o no existe",
-			});
-			return;
-		}
-		detallePlan.forEach(async (detalleAsignatura: IDetalleAsignatura) => {
-			const { asignaturaOriginal }: IDetalleAsignatura = detalleAsignatura;
-			if (!asignaturaOriginal) {
-				res.status(400).json({
-					msg: "Es necesario seleccionar al menos una asignatura del plan",
-				});
-				return;
-			}
-
-			if (
-				!planInscripto.asignaturas?.find((asignatura: IAsignatura) => {
-					return asignatura.nombre === asignaturaOriginal;
-				})
-			) {
-				res.status(404).json({
-					msg: "La asignatura seleccionada no se encuentra en el plan de estudios",
-				});
-				return;
-			}
-		});
-	}
-	next();
-};
 export const validarDatosEstudiante = async (
 	req: Request,
 	res: Response,

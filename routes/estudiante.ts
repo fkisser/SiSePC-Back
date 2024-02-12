@@ -10,10 +10,7 @@ import {
 	updateEstudiante,
 } from "../controllers/estudiante";
 import { validarAcciones } from "../middlewares/validarAcciones";
-import {
-	validarDetallePlan,
-	validarDatosEstudiante,
-} from "../middlewares/validarEstudiante";
+import { validarDatosEstudiante } from "../middlewares/validarEstudiante";
 
 const router = Router();
 
@@ -39,20 +36,13 @@ router.post(
 			"El valor del campo 'trabaja' debe ser de tipo booleano"
 		).isBoolean(),
 		validarDatosEstudiante,
-		validarDetallePlan,
 		errorsCollector,
 	],
 	createEstudiante
 );
 router.patch(
 	"/:ID",
-	[
-		jwtValidator,
-		isAdmin,
-		validarDatosEstudiante,
-		validarDetallePlan,
-		errorsCollector,
-	],
+	[jwtValidator, isAdmin, validarDatosEstudiante, errorsCollector],
 	updateEstudiante
 );
 // router.delete("/:ID", [jwtValidator, isAdmin, errorsCollector], deletePlan);
