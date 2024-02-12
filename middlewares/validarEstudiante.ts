@@ -12,7 +12,7 @@ export const validarDetallePlan = async (
 ) => {
 	const { plan, detallePlan }: IEstudiante = req.body;
 	if (detallePlan && plan) {
-		const planInscripto: IPlan | null = await Plan.findById("").populate(
+		const planInscripto: IPlan | null = await Plan.findById(plan).populate(
 			"carrera"
 		);
 		if (!planInscripto) {
@@ -23,7 +23,6 @@ export const validarDetallePlan = async (
 		}
 		detallePlan.forEach(async (detalleAsignatura: IDetalleAsignatura) => {
 			const { asignaturaOriginal }: IDetalleAsignatura = detalleAsignatura;
-
 			if (!asignaturaOriginal) {
 				res.status(400).json({
 					msg: "Es necesario seleccionar al menos una asignatura del plan",
