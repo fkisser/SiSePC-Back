@@ -33,7 +33,7 @@ export const validarDetallePlan = async (
 
 			if (
 				!planInscripto.asignaturas?.find((asignatura: IAsignatura) => {
-					return asignatura.nombre === asignaturaOriginal.nombre;
+					return asignatura.nombre === asignaturaOriginal;
 				})
 			) {
 				res.status(404).json({

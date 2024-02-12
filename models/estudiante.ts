@@ -2,17 +2,30 @@ import { Model, Schema, Types, model } from "mongoose";
 import { AccionSchema, IAccion } from "./accion";
 import { AsignaturaSchema, IAsignatura } from "./asignatura";
 
-interface ICondicion {
-	nombre: string;
+export interface IDetalleAsignatura {
+	asignaturaOriginal: string;
+	asignaturaActual?: string | null;
+	condicion?: string;
 	fecha?: Date;
 	acta?: string;
 	detalle?: string;
 }
-export const CondicionSchema = new Schema<ICondicion>({
-	nombre: {
+export const DetalleAsignaturaSchema = new Schema<IDetalleAsignatura>({
+	asignaturaOriginal: {
 		type: String,
 		required: true,
-		default: "Pendiente",
+	},
+	asignaturaActual: {
+		type: String,
+		required: false,
+		default: null,
+	},
+	condicion: {
+		type: String,
+		required: false,
+		default: {
+			nombre: "Pendiente",
+		},
 	},
 	fecha: {
 		type: Date,
@@ -25,36 +38,6 @@ export const CondicionSchema = new Schema<ICondicion>({
 	detalle: {
 		type: String,
 		required: false,
-	},
-});
-
-export interface IDetalleAsignatura {
-	asignaturaOriginal: IAsignatura;
-	asignaturaActual?: string | null;
-	aprobada: boolean;
-	condicion?: ICondicion;
-}
-export const DetalleAsignaturaSchema = new Schema<IDetalleAsignatura>({
-	asignaturaOriginal: {
-		type: AsignaturaSchema,
-		required: true,
-	},
-	asignaturaActual: {
-		type: String,
-		required: false,
-		default: null,
-	},
-	aprobada: {
-		type: Boolean,
-		required: true,
-		default: false,
-	},
-	condicion: {
-		type: CondicionSchema,
-		required: false,
-		default: {
-			nombre: "Pendiente",
-		},
 	},
 });
 
