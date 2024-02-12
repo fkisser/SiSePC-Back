@@ -30,7 +30,7 @@ export const CondicionSchema = new Schema<ICondicion>({
 
 export interface IDetalleAsignatura {
 	asignaturaOriginal: IAsignatura;
-	asignaturaActual?: IAsignatura | null;
+	asignaturaActual?: string | null;
 	aprobada: boolean;
 	condicion?: ICondicion;
 }
@@ -40,7 +40,7 @@ export const DetalleAsignaturaSchema = new Schema<IDetalleAsignatura>({
 		required: true,
 	},
 	asignaturaActual: {
-		type: AsignaturaSchema,
+		type: String,
 		required: false,
 		default: null,
 	},
