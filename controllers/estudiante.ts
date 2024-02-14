@@ -77,7 +77,15 @@ export const updateEstudiante = async (req: Request, res: Response) => {
 		ID,
 		{ ...estudianteData },
 		{ new: true }
-	);
+	)
+		.populate("plan")
+		.populate({
+			path: "plan",
+			populate: {
+				path: "carrera",
+				model: "Carrera",
+			},
+		});
 	res.status(200).json({
 		msg: "Estudiante modificado con éxito",
 		estudiante,
