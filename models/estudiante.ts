@@ -1,6 +1,5 @@
 import { Model, Schema, Types, model } from "mongoose";
 import { AccionSchema, IAccion } from "./accion";
-import { AsignaturaSchema, IAsignatura } from "./asignatura";
 
 export interface IDetalleAsignatura {
 	asignaturaOriginal: string;
@@ -23,9 +22,7 @@ export const DetalleAsignaturaSchema = new Schema<IDetalleAsignatura>({
 	condicion: {
 		type: String,
 		required: false,
-		default: {
-			nombre: "Pendiente",
-		},
+		default: "Pendiente",
 	},
 	fecha: {
 		type: Date,
