@@ -5,6 +5,7 @@ import rutasAutenticacion from "../routes/autenticacion";
 import rutasPlan from "../routes/plan";
 import rutasCarrera from "../routes/carrera";
 import rutasEstudiante from "../routes/estudiante";
+import rutasAcciones from "../routes/accion";
 
 import { dbConnection } from "../database/config";
 
@@ -17,6 +18,7 @@ export class Server {
 	pathPlan: string;
 	pathEstudiante: string;
 	pathTutores: string;
+	pathAcciones: string;
 	constructor() {
 		this.app = express();
 		this.port = process.env.PORT;
@@ -25,6 +27,7 @@ export class Server {
 		this.pathPlan = "/planes";
 		this.pathEstudiante = "/estudiantes";
 		this.pathTutores = "/tutores";
+		this.pathAcciones = "/acciones";
 		this.pathPrincipal = "/";
 		this.dbConnect();
 		this.middlewares();
@@ -45,6 +48,7 @@ export class Server {
 		this.app.use(this.pathPlan, rutasPlan);
 		this.app.use(this.pathCarrera, rutasCarrera);
 		this.app.use(this.pathEstudiante, rutasEstudiante);
+		this.app.use(this.pathAcciones, rutasAcciones);
 	}
 
 	listen(): void {
