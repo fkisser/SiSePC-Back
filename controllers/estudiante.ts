@@ -60,7 +60,7 @@ export const createEstudiante = async (req: Request, res: Response) => {
 	}
 	const _plan: IPlan | null = await Plan.findById(plan);
 	const detallePlan = _plan?.asignaturas?.map((asignatura) => {
-		return { asignaturaOriginal: asignatura.nombre, condicion: "Pendiente" };
+		return { asignaturaOriginal: asignatura.nombre, condicion: "Aprobada" };
 	});
 	const estudiante = new Estudiante({ ...estudianteData, detallePlan });
 	await estudiante.save();
