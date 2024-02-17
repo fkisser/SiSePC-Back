@@ -39,7 +39,6 @@ router.post(
 		check("descripcion", "La descripción de la acción es obligatoria")
 			.not()
 			.isEmpty(),
-		check("tutor", "Es necesario asignar tutor/a a la acción").not().isEmpty(),
 		errorsCollector,
 	],
 	createAccion
