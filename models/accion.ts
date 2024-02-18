@@ -7,8 +7,6 @@ export interface IAccion {
 	archivo?: string;
 	observaciones?: string;
 	estado?: string;
-	asignadaEstudiante?: Types.ObjectId;
-	asignadaCatedra?: Types.ObjectId;
 	visible?: boolean;
 }
 
@@ -36,16 +34,6 @@ export const AccionSchema = new Schema<IAccion>({
 	},
 	observaciones: {
 		type: String,
-		required: false,
-	},
-	asignadaEstudiante: {
-		type: Schema.Types.ObjectId,
-		ref: "Estudiante",
-		required: false,
-	},
-	asignadaCatedra: {
-		type: Schema.Types.ObjectId,
-		ref: "Catedra",
 		required: false,
 	},
 	visible: {

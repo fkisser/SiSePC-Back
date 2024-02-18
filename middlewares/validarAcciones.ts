@@ -10,8 +10,7 @@ export const validarAcciones = async (
 ) => {
 	const { acciones } = req.body;
 	acciones?.forEach(async (accion: IAccion) => {
-		const { fecha, descripcion, tutor, asignadaCatedra, asignadaEstudiante } =
-			accion;
+		const { fecha, descripcion, tutor } = accion;
 		if (fecha && !(fecha instanceof Date)) {
 			res.status(400).json({
 				msg: "El formato de fecha es inválido, debe ser instancia de la clase Date",
@@ -29,26 +28,6 @@ export const validarAcciones = async (
 			if (!tutorExistente) {
 				res.status(404).json({
 					msg: "El tutor seleccionado no existe en la base de datos",
-				});
-				return;
-			}
-		}
-		if (asignadaCatedra) {
-			// const tutorExistente: ITutor | null = await Tutor.findById(tutor);
-			// if (!tutorExistente) {
-			// 	res.status(404).json({
-			// 		msg: "El tutor seleccionado no existe en la base de datos",
-			// 	});
-			// 	return;
-			// }
-		}
-		if (asignadaEstudiante) {
-			const estudianteExistente: IEstudiante | null = await Estudiante.findById(
-				asignadaEstudiante
-			);
-			if (!estudianteExistente) {
-				res.status(404).json({
-					msg: "El estudiante seleccionado no existe en la base de datos",
 				});
 				return;
 			}
