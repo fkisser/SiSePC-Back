@@ -7,6 +7,6 @@ export const getTutores = async (req: Request, res: Response) => {
 		const { apellido, nombre, dni, mail, celular, estudiantes } = tutor;
 		return { apellido, nombre, dni, mail, celular, estudiantes };
 	});
-	res.status(200).json({ tutores });
+	res.status(200).json({ partTutores });
 	return;
 };
