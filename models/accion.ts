@@ -1,7 +1,7 @@
 import { Model, Schema, Types, model } from "mongoose";
 
 export interface IAccion {
-	id: string;
+	id: number;
 	fecha: Date;
 	descripcion: string;
 	tutor?: Types.ObjectId;
@@ -13,9 +13,9 @@ export interface IAccion {
 
 export const AccionSchema = new Schema<IAccion>({
 	id: {
-		type: String,
+		type: Number,
 		required: true,
-		default: Date(),
+		default: Date.now(),
 	},
 	fecha: {
 		type: Date,
