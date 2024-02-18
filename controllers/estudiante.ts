@@ -73,6 +73,7 @@ export const createEstudiante = async (req: Request, res: Response) => {
 export const updateEstudiante = async (req: Request, res: Response) => {
 	const { ID } = req.params;
 	const estudianteData = req.body;
+	console.log(estudianteData);
 	const estudiante = await Estudiante.findByIdAndUpdate(
 		ID,
 		{ ...estudianteData },

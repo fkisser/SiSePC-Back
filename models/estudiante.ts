@@ -132,13 +132,10 @@ export const EstudianteSchema = new Schema<IEstudiante>({
 		required: false,
 		default: "",
 	},
-	acciones: [
-		{
-			type: Schema.Types.ObjectId,
-			ref: "Accion",
-			required: false,
-		},
-	],
+	acciones: {
+		type: [AccionSchema],
+		required: false,
+	},
 	detallePlan: {
 		type: [DetalleAsignaturaSchema],
 		required: false,
