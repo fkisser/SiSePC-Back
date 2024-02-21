@@ -2,9 +2,9 @@ import { Request, Response } from "express";
 import Accion, { IAccion } from "../models/accion";
 
 export const getAccionesGenerales = async (req: Request, res: Response) => {
-	const acciones: IAccion[] = await Accion.find({ visible: true }).populate(
-		"tutor"
-	);
+	const acciones: IAccion[] = await Accion.find({ visible: true })
+		.populate("tutor")
+		.sort({ fecha: -1 });
 	res.status(200).json({ acciones });
 	return;
 };
