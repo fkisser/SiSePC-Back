@@ -2,9 +2,9 @@ import { Request, Response } from "express";
 import Accion, { IAccion } from "../models/accion";
 
 export const getAccionesGenerales = async (req: Request, res: Response) => {
-	const acciones: IAccion[] = await Accion.find({ visible: true })
-		.populate("tutor")
-		.sort({ fecha: -1 });
+	const acciones: IAccion[] = await Accion.find({ visible: true }).sort({
+		fecha: -1,
+	});
 	res.status(200).json({ acciones });
 	return;
 };
@@ -27,7 +27,7 @@ export const updateAccion = async (req: Request, res: Response) => {
 		{
 			new: true,
 		}
-	).populate("tutor");
+	);
 	if (!accion) {
 		res.status(404).json({
 			msg: `El ID provisto no corresponde a una accion registrada`,
