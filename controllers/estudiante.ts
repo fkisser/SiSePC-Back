@@ -11,7 +11,8 @@ export const getEstudiantes = async (req: Request, res: Response) => {
 				path: "carrera",
 				model: "Carrera",
 			},
-		});
+		})
+		.sort({ apellido: "asc" });
 	res.status(200).json({ estudiantes });
 	return;
 };
