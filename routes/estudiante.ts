@@ -9,7 +9,6 @@ import {
 	getEstudiantes,
 	updateEstudiante,
 } from "../controllers/estudiante";
-import { validarAcciones } from "../middlewares/validarAcciones";
 import { validarDatosEstudiante } from "../middlewares/validarEstudiante";
 
 const router = Router();
