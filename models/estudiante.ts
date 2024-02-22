@@ -49,6 +49,7 @@ export interface IEstudiante {
 	visible?: boolean;
 	tutores?: string[];
 	trabaja: boolean;
+	esRegular: boolean;
 	relCarrera?: boolean;
 	horarioTrabajo?: string;
 	detallesTrabajo?: string;
@@ -104,6 +105,11 @@ export const EstudianteSchema = new Schema<IEstudiante>({
 	trabaja: {
 		type: Boolean,
 		required: true,
+	},
+	esRegular: {
+		type: Boolean,
+		required: false,
+		default: false,
 	},
 	relCarrera: {
 		type: Boolean,
