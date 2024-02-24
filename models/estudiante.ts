@@ -91,13 +91,10 @@ export const EstudianteSchema = new Schema<IEstudiante>({
 		required: false,
 		default: true,
 	},
-	tutores: [
-		{
-			type: Schema.Types.ObjectId,
-			ref: "Tutor",
-			required: false,
-		},
-	],
+	tutores: {
+		type: String,
+		required: false,
+	},
 	trabaja: {
 		type: Boolean,
 		required: true,
