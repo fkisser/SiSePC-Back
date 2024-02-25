@@ -46,7 +46,7 @@ export interface IEstudiante {
 	celular?: string;
 	ciudad?: string;
 	visible?: boolean;
-	tutores?: string[];
+	tutores?: string;
 	trabaja: boolean;
 	esRegular: boolean;
 	relCarrera?: boolean;
