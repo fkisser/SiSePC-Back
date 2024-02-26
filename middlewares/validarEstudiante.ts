@@ -61,18 +61,14 @@ export const validarDatosEstudiante = async (
 		return;
 	}
 
-	if (tutores && tutores.length > 0) {
-		tutores.forEach(async (tutor) => {
-			const tutorExistente: ITutor | null = await Tutor.findOne({
-				nombre: tutor,
+	if (tutores) {
+		const tutorExistente: ITutor | null = await Tutor.findById(tutores);
+		if (!tutorExistente) {
+			res.status(404).json({
+				msg: "El tutor asignado no se encuentra en la base de datos, elija otro",
 			});
-			if (!tutorExistente) {
-				res.status(404).json({
-					msg: "Uno o mas tutores asignados no se encuentran en la base de datos, el nombre debe ser coincidente",
-				});
-				return;
-			}
-		});
+			return;
+		}
 	}
 
 	if (trabaja) {

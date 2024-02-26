@@ -45,9 +45,8 @@ export interface IEstudiante {
 	mail: string;
 	celular?: string;
 	ciudad?: string;
-	cursando: boolean;
 	visible?: boolean;
-	tutores?: string[];
+	tutores?: string;
 	trabaja: boolean;
 	esRegular: boolean;
 	relCarrera?: boolean;
@@ -87,23 +86,15 @@ export const EstudianteSchema = new Schema<IEstudiante>({
 		type: String,
 		required: false,
 	},
-	cursando: {
-		type: Boolean,
-		required: true,
-		default: true,
-	},
 	visible: {
 		type: Boolean,
 		required: false,
 		default: true,
 	},
-	tutores: [
-		{
-			type: Schema.Types.ObjectId,
-			ref: "Tutor",
-			required: false,
-		},
-	],
+	tutores: {
+		type: String,
+		required: false,
+	},
 	trabaja: {
 		type: Boolean,
 		required: true,
