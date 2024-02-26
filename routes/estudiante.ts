@@ -27,10 +27,6 @@ router.post(
 		check("mail", "El campo mail es obligatorio").not().isEmpty(),
 		check("mail", "El formato de mail es inválido").isEmail(),
 		check(
-			"cursando",
-			"El valor del campo 'cursando' debe ser de tipo booleano"
-		).isBoolean(),
-		check(
 			"trabaja",
 			"El valor del campo 'trabaja' debe ser de tipo booleano"
 		).isBoolean(),
