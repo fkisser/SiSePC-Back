@@ -22,7 +22,6 @@ export class Server {
 	pathTutores: string;
 	pathAcciones: string;
 	pathResolucion: string;
-	corsOptions;
 	constructor() {
 		this.app = express();
 		this.port = process.env.PORT;
@@ -34,12 +33,8 @@ export class Server {
 		this.pathAcciones = "/acciones";
 		this.pathResolucion = "/resoluciones";
 		this.pathPrincipal = "/";
-		this.corsOptions = {
-			origin: "https://sisepc.vercel.app",
-			optionsSuccessStatus: 200,
-		};
-		this.dbConnect();
 		this.middlewares();
+		this.dbConnect();
 		this.routes();
 	}
 
@@ -47,8 +42,8 @@ export class Server {
 		await dbConnection();
 	}
 	middlewares(): void {
+		this.app.use(cors());
 		this.app.use(express.json());
-		this.app.use(cors(this.corsOptions));
 	}
 
 	routes(): void {
