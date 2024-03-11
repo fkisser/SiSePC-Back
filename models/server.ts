@@ -35,7 +35,7 @@ export class Server {
 		this.pathResolucion = "/resoluciones";
 		this.pathPrincipal = "/";
 		this.corsOptions = {
-			origin: "https://sisepc.vercel.app/",
+			origin: "https://sisepc.vercel.app",
 			optionsSuccessStatus: 200,
 		};
 		this.dbConnect();
