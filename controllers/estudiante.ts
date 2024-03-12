@@ -3,7 +3,7 @@ import Estudiante, { IEstudiante } from "../models/estudiante";
 import Plan, { IPlan } from "../models/plan";
 
 export const getEstudiantes = async (req: Request, res: Response) => {
-	const estudiantes: IEstudiante[] = await Estudiante.find()
+	const estudiantes: IEstudiante[] = await Estudiante.find({ visible: true })
 		.populate("plan")
 		.populate({
 			path: "plan",
@@ -90,6 +90,26 @@ export const updateEstudiante = async (req: Request, res: Response) => {
 		});
 	res.status(200).json({
 		msg: "Estudiante modificado con éxito",
+		estudiante,
+	});
+	return;
+};
+
+export const deleteEstudiante = async (req: Request, res: Response) => {
+	const { ID } = req.params;
+	const estudiante = await Estudiante.findByIdAndUpdate(
+		ID,
+		{ visible: false },
+		{ new: true }
+	);
+	if (!estudiante) {
+		res.status(404).json({
+			msg: `El ID provisto no corresponde a un estudiante registrado`,
+		});
+		return;
+	}
+	res.status(200).json({
+		msg: "Estudiante eliminado/a con éxito",
 		estudiante,
 	});
 	return;

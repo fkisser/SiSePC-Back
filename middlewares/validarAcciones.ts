@@ -1,7 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { IAccion } from "../models/accion";
 import Tutor, { ITutor } from "../models/tutor";
-import Estudiante, { IEstudiante } from "../models/estudiante";
 
 export const validarAcciones = async (
 	req: Request,
