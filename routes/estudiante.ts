@@ -13,7 +13,7 @@ import { validarDatosEstudiante } from "../middlewares/validarEstudiante";
 
 const router = Router();
 
-router.get("/", [jwtValidator, isAdmin], getEstudiantes);
+router.get("/", [jwtValidator /*, isAdmin*/], getEstudiantes);
 router.get("/dni/:DNI", getEstudianteByDNI);
 router.post(
 	"/",

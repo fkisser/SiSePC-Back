@@ -25,7 +25,11 @@ router.post(
 	],
 	createAccion
 );
-router.patch("/:ID", [jwtValidator, isAdmin, errorsCollector], updateAccion);
+router.patch(
+	"/:ID",
+	[jwtValidator, /*isAdmin, */ errorsCollector],
+	updateAccion
+);
 router.delete("/:ID", [jwtValidator, isAdmin, errorsCollector], deleteAccion);
 
 export default router;
