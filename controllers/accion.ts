@@ -13,7 +13,7 @@ export const createAccion = async (req: Request, res: Response) => {
 	const accion = new Accion(accionData);
 	await accion.save();
 	res.status(201).json({
-		msg: "Accion creada con éxito",
+		msg: "Acción creada con éxito",
 		accion,
 	});
 	return;
@@ -30,12 +30,12 @@ export const updateAccion = async (req: Request, res: Response) => {
 	);
 	if (!accion) {
 		res.status(404).json({
-			msg: `El ID provisto no corresponde a una accion registrada`,
+			msg: `El ID provisto no corresponde a una acción registrada`,
 		});
 		return;
 	}
 	res.status(200).json({
-		msg: "Accion modificada con éxito",
+		msg: "Acción modificada con éxito",
 		accion,
 	});
 	return;

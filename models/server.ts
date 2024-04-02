@@ -33,8 +33,8 @@ export class Server {
 		this.pathAcciones = "/acciones";
 		this.pathResolucion = "/resoluciones";
 		this.pathPrincipal = "/";
-		this.dbConnect();
 		this.middlewares();
+		this.dbConnect();
 		this.routes();
 	}
 
@@ -42,8 +42,8 @@ export class Server {
 		await dbConnection();
 	}
 	middlewares(): void {
-		this.app.use(express.json());
 		this.app.use(cors());
+		this.app.use(express.json());
 	}
 
 	routes(): void {
