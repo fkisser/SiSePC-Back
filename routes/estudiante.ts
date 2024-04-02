@@ -13,7 +13,7 @@ import { validarDatosEstudiante } from "../middlewares/validarEstudiante";
 
 const router = Router();
 
-router.get("/", [jwtValidator /*, isAdmin*/], getEstudiantes);
+router.get("/", [jwtValidator /*,isAdmin*/], getEstudiantes);
 router.get("/dni/:DNI", getEstudianteByDNI);
 router.post(
 	"/",
@@ -37,7 +37,7 @@ router.post(
 );
 router.patch(
 	"/:ID",
-	[jwtValidator, isAdmin, validarDatosEstudiante, errorsCollector],
+	[jwtValidator, /*isAdmin,*/ validarDatosEstudiante, errorsCollector],
 	updateEstudiante
 );
 // router.delete("/:ID", [jwtValidator, isAdmin, errorsCollector], deletePlan);

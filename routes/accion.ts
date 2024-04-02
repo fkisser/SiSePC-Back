@@ -27,7 +27,7 @@ router.post(
 );
 router.patch(
 	"/:ID",
-	[jwtValidator, /*isAdmin, */ errorsCollector],
+	[jwtValidator, /*isAdmin,*/ errorsCollector],
 	updateAccion
 );
 router.delete("/:ID", [jwtValidator, isAdmin, errorsCollector], deleteAccion);
