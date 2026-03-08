@@ -7,7 +7,7 @@ import { mailRegExp } from "../helpers/constants";
 export const validarDatosEstudiante = async (
 	req: Request,
 	res: Response,
-	next: NextFunction
+	next: NextFunction,
 ) => {
 	const {
 		apellido,
@@ -74,7 +74,7 @@ export const validarDatosEstudiante = async (
 	if (trabaja) {
 		if (!detallesTrabajo) {
 			res.status(400).json({
-				msg: "Si trabaja, al menos completar el detalle del trabajo",
+				msg: "Si trabaja, completar el detalle del trabajo",
 			});
 			return;
 		}
