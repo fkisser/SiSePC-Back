@@ -8,6 +8,7 @@ import {
 	getEstudianteByDNI,
 	getEstudiantes,
 	updateEstudiante,
+	deleteEstudiante,
 } from "../controllers/estudiante";
 import { validarDatosEstudiante } from "../middlewares/validarEstudiante";
 
@@ -40,6 +41,11 @@ router.patch(
 	[jwtValidator, /*isAdmin,*/ validarDatosEstudiante, errorsCollector],
 	updateEstudiante
 );
-// router.delete("/:ID", [jwtValidator, isAdmin, errorsCollector], deletePlan);
+// --- AGREGAMOS LA RUTA DE ELIMINAR ---
+router.delete(
+	"/:ID", 
+	[jwtValidator, isAdmin, errorsCollector], 
+	deleteEstudiante
+);
 
 export default router;
